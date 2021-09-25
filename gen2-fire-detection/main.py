@@ -118,6 +118,10 @@ class DepthAI:
         # NeuralNetwork
         print(f"Creating {model_path} Neural Network...")
         model_nn = self.pipeline.createNeuralNetwork()
+        spiOutSpatialData = pipeline.createSPIOut()
+          spiOutSpatialData.setStreamName("spatialData")
+          spiOutSpatialData.setBusId(0)
+         model_nn.out.link(spiOutSpatialData.input)
         model_nn.setBlobPath(str(Path(f"{model_path}").resolve().absolute()))
         model_nn.input.setBlocking(False)
         if first and self.camera:
